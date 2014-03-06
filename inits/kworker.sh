@@ -1,8 +1,8 @@
 #!/bin/sh
 #!/usr/bin/expect
 # This is some secure program that uses security.
-#Usage: sh kworker.sh -[pass/i] <password / identity file> user@<machine> <file> -port <portnumer def:22> 
-#Example: sh kworker.sh -pass my_password user@192.168.1.1 file
+#Usage: sh kworker.sh --[pass/i] <password / identity file> user@<machine> <file> --port <portnumer def:22> 
+#Example: sh kworker.sh --pass my_password user@192.168.1.1 script
 #Dependencies: expect
 
 
@@ -26,7 +26,7 @@ send -- \"\$password\\r\"
 # send blank line (\r) to make sure we get back to gui
 expect \"*\$*\"
 sleep 1
- " > "$DIR/"expscp.exp
+ " > "$DIR/"expscppass.exp
 
 echo "set machine [lrange \$argv 0 0]
 set password [lrange \$argv 1 1]
@@ -51,7 +51,26 @@ expect \"*\$*\"
 send -- \"sh \$filename \\r\"
 expect \"*\$*\"
 sleep 1
- " > "$DIR/"expfile.exp
+ " > "$DIR/"expfilepass.exp
+
+echo "set machine [lrange \$argv 0 0]
+set key [lrange \$argv 1 1]
+set port [lrange \$argv 2 2]
+set filename [lrange \$argv 3 3]
+
+set timeout -1
+# now connect to remote UNIX box (ipaddr) with given script to execute
+spawn ssh -i \$key \$machine -p\$port
+expect \"*\$*\"
+sleep 1
+# execute filename
+send \"cd /tmp/ \\r \"
+sleep 1
+expect \"*\$*\"
+send -- \"sh \$filename \\r\"
+expect \"*\$*\"
+sleep 1
+ " > "$DIR/"expfilekey.exp
 
 echo "************** WAIT TILL YOU SEE \"DONE\" *****************"
 
@@ -63,7 +82,7 @@ PORTTEST=$5
 PORT=$6
 
 
-if [ "$PORTTEST" == "-port" ]; 
+if [ "$PORTTEST" == "--port" ]; 
 then
     echo "Trying on port $PORT.."
 else
@@ -72,20 +91,29 @@ else
 fi
 
 #Act according to type 
-if [ "$SSHTYPE" == "-pass" ]; then
+if [ "$SSHTYPE" == "--pass" ]; then
     echo "Type is password"
     echo "Copying $FILE from local machine to $MACHINE using port number $PORT..."
-    expect $DIR'/'expscp.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
+    expect $DIR'/'expscppass.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
     echo "File copied"
     echo "Executing $FILE from local machine to $MACHINE using port number $PORT..."
-    expect $DIR'/'expfile.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
+    expect $DIR'/'expfilepass.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
     echo ""
     echo "********* Done *********"
 elif [ "$SSHTYPE" == "-i" ]; then
     echo "Type is key"
+    echo "Copying $FILE from local machine to $MACHINE using port number $PORT..."
+    scp -i $PWDORKEY $FILE $MACHINE:/tmp/ 
+    echo "File copied"
+    echo "Executing $FILE from local machine to $MACHINE using port number $PORT..."
+    expect $DIR'/'expfilekey.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
+    echo ""
+    echo "********* Done *********"
+
 elif [ "SSHTYPE" ]; then
     echo "Specify ssh type with -p or -i"
 fi
 
-rm expscp.exp
-rm expfile.exp
+rm expscppass.exp
+rm expfilepass.exp
+rm expfilekey.exp
