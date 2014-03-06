@@ -1,9 +1,18 @@
 #!/bin/sh
 #!/usr/bin/expect
-# This is some secure program that uses security.
-#Usage: sh kworker.sh --[pass/i] <password / identity file> user@<machine> <file> --port <portnumer def:22> 
-#Example: sh kworker.sh --pass my_password user@192.168.1.1 script
-#Dependencies: expect
+
+#################################################################
+#### 
+#### -@author:  Naveen Kumar Lekkalapudi
+#### -@Usage:   sh kworker.sh --[pass/i] <password / identity file> 
+####            user@<machine> <script> --port <portnumer def:22>
+#### -@Example: sh kworker.sh --pass my_password user@192.168.1.1 
+####            script
+#### -@Description: Copies script to remote <machine> and executes it
+#### -@Dependencies: Expect package    
+#### -@contact: nalekkalapudi@mix.wvu.edu
+####
+##################################################################
 
 
 DIR=`pwd`
@@ -112,6 +121,7 @@ elif [ "$SSHTYPE" == "-i" ]; then
 
 elif [ "SSHTYPE" ]; then
     echo "Specify ssh type with -p or -i"
+    echo "********* Done *********"
 fi
 
 rm expscppass.exp
