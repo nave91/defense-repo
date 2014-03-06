@@ -7,3 +7,22 @@ yum deplist <package>
 #List open files:
 lsof
 
+#List open ports
+ss -ap
+netstat -nplt
+
+#Close ipv6
+sudo gedit /etc/sysctl.conf
+
+net.ipv6.conf.all.disable_ipv6 = 1
+net.ipv6.conf.default.disable_ipv6 = 1
+net.ipv6.conf.lo.disable_ipv6 = 1
+
+sudo sysctl -p
+
+----OR----
+
+sudo sysctl net.ipv6.conf.all.disable_ipv6=1 net.ipv6.conf.default.disable_ipv6=1 net.ipv6.conf.lo.disable_ipv6=1
+
+#Disable wall messages
+mesg n
