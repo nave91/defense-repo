@@ -1,0 +1,9 @@
+#List dependencies:
+apt-cache depends <package>
+apt-cache rdepends <package>
+
+yum deplist <package>
+
+#List open files:
+lsof
+
