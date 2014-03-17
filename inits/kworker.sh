@@ -94,38 +94,38 @@ PORT=$6
 
 if [ "$PORTTEST" == "--port" ] 
 then
-    echo "Trying on port $PORT.."
+    echo ">Trying on port $PORT.."
 else
-    echo "Trying on port 22"
+    echo ">Trying on port 22.."
     PORT=22
 fi
 
 #Act according to type 
 if [ "$SSHTYPE" == "--pass" ]
 then
-    echo "Type is password"
-    echo "Copying $FILE from local machine to $MACHINE using port number $PORT..."
+    echo ">Type is password"
+    echo ">Copying $FILE from local machine to $MACHINE using port number $PORT..."
     expect $DIR'/'expscppass.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
-    echo "File copied"
-    echo "Executing $FILE from local machine to $MACHINE using port number $PORT..."
+    echo ">File copied"
+    echo ">Executing $FILE from local machine to $MACHINE using port number $PORT..."
     expect $DIR'/'expfilepass.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
     echo ""
     echo "**************         \"DONE\"          *****************"
 
 elif [ "$SSHTYPE" == "-i" ]
 then
-    echo "Type is key"
-    echo "Copying $FILE from local machine to $MACHINE using port number $PORT..."
+    echo ">Type is key"
+    echo ">Copying $FILE from local machine to $MACHINE using port number $PORT..."
     scp -i $PWDORKEY $FILE $MACHINE:/tmp/ 
-    echo "File copied"
-    echo "Executing $FILE from local machine to $MACHINE using port number $PORT..."
+    echo ">File copied"
+    echo ">Executing $FILE from local machine to $MACHINE using port number $PORT..."
     expect $DIR'/'expfilekey.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
     echo ""
     echo "**************         \"DONE\"          *****************"
 
 elif [ "SSHTYPE" ]
 then
-    echo "Specify ssh type with --pass or -i"
+    echo ">Specify ssh type with --pass or -i"
     echo "**************         \"DONE\"          *****************"
 fi
 
