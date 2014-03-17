@@ -4,10 +4,11 @@
 #################################################################
 #### 
 #### -@author:  Naveen Kumar Lekkalapudi
-#### -@Usage:   sh kworker.sh --[pass/i] <password / identity file> 
+#### -@Usage:   sh kworker.sh -[-pass/i] <password / identity file> 
 ####            user@<machine> <script> --port <portnumer def:22>
 #### -@Example: sh kworker.sh --pass my_password user@192.168.1.1 
 ####            script
+#### -@Example: sh kworker.sh -i my_key.pem user@192.168.1.1 script
 #### -@Description: Copies script to remote <machine> and executes it
 #### -@Dependencies: Expect package    
 #### -@contact: nalekkalapudi@mix.wvu.edu
@@ -83,15 +84,15 @@ sleep 1
 
 echo "************** WAIT TILL YOU SEE \"DONE\" *****************"
 
-SSHTYPE=$1 #this is our password.
-PWDORKEY=$2
+SSHTYPE=$1 #Specify ssh type with --pass or -i.
+PWDORKEY=$2 #Password or key.
 MACHINE=$3
-FILE=$4
+FILE=$4 #Script to be executed.
 PORTTEST=$5
 PORT=$6
 
 
-if [ "$PORTTEST" == "--port" ]; 
+if [ "$PORTTEST" == "--port" ] 
 then
     echo "Trying on port $PORT.."
 else
@@ -100,7 +101,8 @@ else
 fi
 
 #Act according to type 
-if [ "$SSHTYPE" == "--pass" ]; then
+if [ "$SSHTYPE" == "--pass" ]
+then
     echo "Type is password"
     echo "Copying $FILE from local machine to $MACHINE using port number $PORT..."
     expect $DIR'/'expscppass.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
@@ -108,8 +110,10 @@ if [ "$SSHTYPE" == "--pass" ]; then
     echo "Executing $FILE from local machine to $MACHINE using port number $PORT..."
     expect $DIR'/'expfilepass.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
     echo ""
-    echo "********* Done *********"
-elif [ "$SSHTYPE" == "-i" ]; then
+    echo "**************         \"DONE\"          *****************"
+
+elif [ "$SSHTYPE" == "-i" ]
+then
     echo "Type is key"
     echo "Copying $FILE from local machine to $MACHINE using port number $PORT..."
     scp -i $PWDORKEY $FILE $MACHINE:/tmp/ 
@@ -117,11 +121,12 @@ elif [ "$SSHTYPE" == "-i" ]; then
     echo "Executing $FILE from local machine to $MACHINE using port number $PORT..."
     expect $DIR'/'expfilekey.exp "$MACHINE" "$PWDORKEY" "$PORT" "$FILE"
     echo ""
-    echo "********* Done *********"
+    echo "**************         \"DONE\"          *****************"
 
-elif [ "SSHTYPE" ]; then
+elif [ "SSHTYPE" ]
+then
     echo "Specify ssh type with -p or -i"
-    echo "********* Done *********"
+    echo "**************         \"DONE\"          *****************"
 fi
 
 rm expscppass.exp
