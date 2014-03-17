@@ -4,11 +4,11 @@
 #################################################################
 #### 
 #### -@author:  Naveen Kumar Lekkalapudi
-#### -@Usage:   sh kworker.sh -[-pass/i] <password / identity file> 
+#### -@Usage:   bash kworker.sh -[-pass/i] <password / identity file> 
 ####            user@<machine> <script> --port <portnumer def:22>
-#### -@Example: sh kworker.sh --pass my_password user@192.168.1.1 
+#### -@Example: bash kworker.sh --pass my_password user@192.168.1.1 
 ####            script
-#### -@Example: sh kworker.sh -i my_key.pem user@192.168.1.1 script
+#### -@Example: bash kworker.sh -i my_key.pem user@192.168.1.1 script
 #### -@Description: Copies script to remote <machine> and executes it
 #### -@Dependencies: Expect package    
 #### -@contact: nalekkalapudi@mix.wvu.edu
