@@ -125,7 +125,7 @@ then
 
 elif [ "SSHTYPE" ]
 then
-    echo "Specify ssh type with -p or -i"
+    echo "Specify ssh type with --pass or -i"
     echo "**************         \"DONE\"          *****************"
 fi
 
