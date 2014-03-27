@@ -1,0 +1,20 @@
+//
+// Do any local configuration here
+//
+
+// Consider adding the 1918 zones here, if they are not used in your
+// organization
+//include "/etc/bind/zones.rfc1918";
+
+zone "cyberwvu.org" {
+             type master;
+             file "/etc/bind/db.cyberwvu.org";
+	     allow-transfer {10.0.0.70;};
+	};
+
+zone "0.0.10.in-addr.arpa" {
+        type master;
+        notify no;
+        file "/etc/bind/db.10";
+	allow-transfer {10.0.0.70;};
+};
