@@ -1,0 +1,60 @@
+List of things to do:
+1.working or broken. Identify services. up and runing. working?
+2.Uplug to make them loose shells.
+3. Logs. Read.
+4. Patches
+5. nmap against own systems to identify services. REmove services if not needed.
+6. lsof---------> -i lists processes --->-ip gives pid ---.running processes
+7. netstat -nsob
+8. AV: bit9, palo alto
+
+Honey ports binds ip 
+--sttutter slows down scanners
+
+
+--------------------WINDOWS-------------------AAA OODA
+
+ADHD
+---
+spidertrap
+--levels of pages to return to crawlers
+slow down everythign
+
+honeyport-->acts after SYN SYN-ACK ACK-ACK-->after threeway handshake
+RFC 793 describes TCP/IP 4 way handshake
+
+4way handshake bypasses 3way handshake<----IDS/FIREWALLS work only on 3way handshake
+
+-------------
+
+Attribution
+
+------------
+
+Metasploit Decloak engine---find people behind proxies.
+
+ADHD Logs give out glob/local ip
+
+Word web bugs
+
+hONEY DOC modify ip to send data to own webbug server
+
+Honey badger
+------------
+Java applet/macro code. Platform independent
+Google tracks Wireless to get Long/Lat coordinates
+
+---------------
+
+Attack
+
+---------------
+BEWARE!
+
+NameCheap??--Dont
+CArd-walmart???
+Paypal is your friend
+hotmail is your friend
+
+Honey docs---opensource
+
