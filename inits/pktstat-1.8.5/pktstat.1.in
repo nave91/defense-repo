@@ -1,0 +1,270 @@
+.\"	David Leonard, 2002. Public domain.
+.\"	$Id: pktstat.1.in 1196 2007-09-04 13:49:33Z d $
+.Dd June 23, 2002
+.Dt PKTSTAT 1
+.Os
+.Sh NAME
+.Nm pktstat
+.Nd display packet activity on a crt
+.Sh SYNOPSIS
+.Nm pktstat
+.Op Fl 1BcFlnpPtT
+.Op Fl a Ar abbrev
+.Op Fl A Ar file
+.Op Fl i Ar interface
+.Op Fl k Ar keeptime
+.Op Fl m Ar maxbps
+.Op Fl w Ar waittime
+.Op Ar filter-expr
+.Sh DESCRIPTION
+The
+.Nm
+program displays a real-time summary of packet activity on an interface.
+Each line displays the data rate associated with different classes of packets.
+.Pp
+.Nm
+understands the following command line options:
+.Bl -tag -width 12ex -offset indent
+.It Fl 1
+Single-shot (batch) mode.
+.Nm
+collects data for
+.Ar waittime
+seconds (see
+.Fl w
+option)
+then emits a line indicating the number of flows detected, and
+the period of data capture in seconds.
+Then, each flow line is printed in the form of the number of
+data link octets associated with the flow, the number of
+data link frames (packets), and then the flow description.
+.It Fl a Ar abbrev
+Add
+.Ar abbrev
+to the list of abbreviation patterns.
+(See below for details.)
+.It Fl A Ar file
+Read abbreviation patterns from the given
+.Ar file .
+(See
+.Sx Abbreviations ,
+below.)
+If the option
+.Fl A Ic none
+is given, then default abbreviation files are not loaded.
+.It Fl B
+Display data rates in bytes per second (Bps) instead of
+in bits per second (bps).
+.It Fl c
+Do not combine some packet classes into one class.
+For example, TCP connections are kept as two separate flows.
+.\" .It Fl E
+.\" Don't exit on errors from the
+.\" .Xr pcap 3
+.\" library.
+.It Fl F
+Show full hostnames.
+Normally, hostnames are truncated to the first component of their domain name
+before display.
+.It Fl i Ar interface
+Listen on the given interface.
+If not specified, a suitable interface is chosen.
+.It Fl k Ar keeptime
+When no packets have been seen for a particular class,
+retain an entry on the display for this many screen seconds.
+Defaults to 10.
+.It Fl l
+Display and sort flows by when they were last seen.
+(Incompatible with
+.Fl t )
+.It Fl m Ar maxbps
+Fix the maximum bit rate for the interface at
+.Ar maxbps
+instead of auto-detecting it.
+.It Fl n
+Do not try and resolve hostnames or service port numbers.
+.It Fl p
+Show packet counts instead of bit counts.
+.It Fl P
+Do not try to put the interface into promiscuous mode.
+.It Fl t
+"Top" mode.
+Sorts the display by bit count (or packet count if
+.Fl p
+was given) instead of by
+the name.
+.It Fl T
+Show totals.
+.It Fl w Ar waittime
+Refresh the display every
+.Ar waittime
+seconds.
+The default is 5 seconds.
+.It Ar filter-expr
+Only consider packets matching the given
+.Ar filter-expr .
+If no filter is provided, all packets are considered.
+See
+.Xr tcpdump 8
+for information on valid expressions.
+.El
+.Pp
+If the terminal supports it, the display briefly highlights in bold
+new connections or old connections carrying data after a period
+of inactivity.
+.Pp
+Simple statistics about the interface are also displayed such as 
+the current and average bit rates (measured just above the data link layer).
+Load averages refer to bit rate decayed averages for the last 1, 5 and 15
+minutes.
+.Pp
+During display, the following keystrokes are recognised:
+.Bl -tag -width Ic -offset indent
+.It Ic q
+quit
+.It Ic Ctrl-L
+redraw screen
+.It Ic t
+toggle the
+.Fl t
+flag (top mode)
+.It Ic T
+toggle the
+.Fl T
+flag (totals mode)
+.It Ic w
+allows changing of the
+.Fl w
+flag value (wait time)
+.It Ic n
+toggle the
+.Fl n
+flag (numeric display)
+.It Ic p
+toggle the
+.Fl p
+flag (packets instead of bits)
+.It Ic b | B
+toggle the
+.Fl B
+flag (bps or Bps)
+.It Ic f | F
+toggle the
+.Fl F
+flag (full hostnames)
+.It Ic r
+reset collected statistics (min, max, etc.),
+flush flow history and reset DNS/service and fragment caches
+.It Ic l
+show and sort flows by when they were last active
+.It Ic ?
+toggle display of help/status text at the bottom of the display
+.El
+.Ss Packet classes
+.Pp
+All packet classes, or flows, are
+.Qq tagged
+with a descriptive string, such as
+.Ql "tcp ftpserver:20524 <-> cathexis:17771" .
+.Pp
+In addition to being tagged, some protocol-state information can
+be associated with a flow. This is displayed immediately below a flow line.
+Descriptive information for FTP, HTTP, X11 and SUP connections is determined
+from simple decoding of some packets.
+If the connection is 'open', it is introduced with a right angle shape (+),
+otherwise it is introduced with a hyphen character.
+.Pp
+.Bd -literal -offset indent
+tcp www:80 <-> hamartia:19179
++ GET /index.html
+.Ed
+.\"
+.Ss Abbreviations
+.Pp
+Abbreviation patterns are a way of further combining flows.
+As packets are decoded, their flow name is constructed at the various
+protocol layers. At address combining stage (where arrows such as
+.Ql "->"
+are inserted)
+and at the final display stage, flow names are checked against
+a list of abbreviation patterns,
+and the abbreviation's name substituted if a match is found.
+For example, the pattern
+.Ql "* <-> *:domain"
+will match DNS packets in both the UDP and TCP layers.
+.Pp
+Abbreviations take the form
+.Op Ar abbrev Ns Li @ Ns
+.Ar pattern .
+The
+.Ar pattern
+part can contain the wildcard character, asterisk
+.Ql *
+which matches zero or more non-space characters.
+The space character
+matches one or more whitespace characters.
+Leading and trailing spaces are ignored.
+.Pp
+If the optional
+.Ar abbrev
+is not specified, the the pattern text itself is used as the abbreviation.
+.Pp
+Patterns are checked in the order given on the command line or in the files,
+i.e. as soon as one of the patterns matches a tag, no further patterns
+are considered.
+Recall that patterns can be applied multiple times to a tag.
+.Pp
+A patterns file can contain blank lines, which are ignored.
+Comment lines that commence with a
+.Ql #
+character are also ignored.
+.Pp
+After processing all command line abbreviations and
+abbreviation files,
+.Nm pktstat
+looks for and loads the files
+.Pa ".pktstatrc" ,
+.Pa $HOME/.pktstatrc
+and
+.Pa @PATH_PKTSTATRC@ .
+This behaviour is suppressed by supplying an
+.Fl A Ic none
+option.
+.Sh EXAMPLES
+.Pp
+Here are the contents of my
+.Pa .pktstatrc
+file:
+.Pp
+.Bd -literal -offset indent
+dns @ udp *:domain <-> *
+dns @ udp * <-> *:domain
+irc @ udp 192.168.0.81:6666 <-> *
+.Ed
+.Sh SEE ALSO
+.Xr bpf 4 ,
+.Xr tcpdump 8
+.\" .Sh COMPATIBILITY
+.\" .Sh STANDARDS
+.Sh AUTHORS
+David Leonard,
+.Pa leonard@users.sourceforge.net
+.\" .Sh HISTORY
+.Sh BUGS
+.Pp
+DNS lookups can take too much time, possibly leading to missed packets.
+.Pp
+The data rates do not take into account data link framing overhead or
+compression savings at the data link layer.
+.Pp
+The direction of traffic is not taken into account: both ingress and
+egress data rates are combined. If you want to separate them, you will need
+to use a filter expression.
+.Pp
+Descriptive information for X11, FTP, HTTP and SUP flows is derived from the
+very first packets sent on those protocols.
+If you start
+.Nm
+after any of these flows have commenced, there may be no description
+available for them.
+.\" .Sh CAVEATS

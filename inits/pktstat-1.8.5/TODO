@@ -1,0 +1,3 @@
+
+Handle bittorrent properly
+	- ports 6881-6889, look for torrent protocol; aggregate bandwidth

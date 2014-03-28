@@ -1,0 +1,1157 @@
+2012-03-04 14:54  d
+
+	* NEWS, configure.ac: 1.8.5
+
+2012-03-04 14:43  d
+
+	* ether.c, ip.c: fix parameter conversion warnings
+
+2012-03-04 14:39  d
+
+	* wol.c: fix signed char overflow warning
+
+2012-03-04 14:38  d
+
+	* display.c: fixed signed-ness warnings
+
+2012-03-04 14:32  d
+
+	* NEWS: Update NEWS
+
+2012-03-04 14:31  d
+
+	* tcp_smtp.c: Handle case where STARTTLS may appear in same SMTP
+	  packet
+
+2012-03-04 14:31  d
+
+	* tcp.c, tcp_http.c: Fix some warnings with casts yay
+
+2012-03-04 14:24  d
+
+	* main.c: Fix compiler warnings with volatiles
+
+2012-03-04 14:22  d
+
+	* abbrev.c: Remove const use warning
+
+2012-03-04 14:21  d
+
+	* ether.c: Oops
+
+2012-03-04 14:10  d
+
+	* machendian.h, tcp.c, udp.c: Header fixes from Thomas Seyrat
+	  <tomasera@debian.org>
+
+2012-03-04 14:07  d
+
+	* main.c: Fixes from Jari Aalto (Debian, 20-gcc.patch)
+
+2012-03-04 13:53  d
+
+	* ether.c: avoid alignment issues when prinying SNAP OIDs
+
+2012-03-04 13:53  d
+
+	* tcp_smtp.c: Detect STARTTLS in SMTP so we don't print garbage
+
+2008-03-21 22:26  d
+
+	* Makefile.am, NEWS, tcp.c, tcp.h, tcp_smtp.c: Add an SMTP decoder
+
+2008-03-21 22:20  d
+
+	* xx_malloc.c: when debugging memory, fill new memory with
+	  0xd0d0d0d0
+
+2008-02-29 16:11  d
+
+	* Makefile.am, abbrev.c, abbrev.h, compat.h, display.c, display.h,
+	  flow.c, flow.h, main.c, xx_malloc.c: Be much more careful with
+	  memory allocation.
+	  Limit the size of the flows array.
+	  
+	  Add a malloc test wrapper; release all memory during exit.
+	  valgrind and the xx_malloc module are now tools for finding
+	  memory
+	  leaks.
+
+2008-02-29 16:03  d
+
+	* pktstat.spec, pktstat.spec.in: Remove pktstat.spec
+
+2007-09-04 13:49  d
+
+	* NEWS, display.c, display.h, main.c, main.h, pktstat.1.in: bug 63:
+	  add -1 option for batch output
+
+2007-09-04 13:11  d
+
+	* NEWS: update NEWS for 1.8.4
+
+2007-09-04 13:08  d
+
+	* configure.ac: bump to 1.8.4
+
+2007-08-30 10:33  d
+
+	* tag.c, tcp_http.c, wol.c: Include type.h for uint64_t which is
+	  needed for flow.h
+
+2007-08-30 10:33  d
+
+	* NEWS: update NEWS
+
+2007-08-30 09:24  d
+
+	* tcp_http.c: avoid crashes with malformed HTTP requests
+
+2007-08-30 09:23  d
+
+	* ip.c: be careful with sign extension when decoding IP headers
+
+2007-08-30 09:22  d
+
+	* tcp.c: correct size argument in an snprintf (benign)
+
+2007-03-28 12:54  d
+
+	* NEWS, display.c, main.c, resize.c, resize.h: bug 56 (again):
+	  further window resize handling improvements
+
+2007-01-18 22:08  d
+
+	* configure.ac, display.c, flow.h, type.h: bug 59: increase counter
+	  range from 4GiB to 64PiB (i.e. 32 bit to 64 bit)
+
+2006-11-14 11:43  d
+
+	* Makefile.am: make the ChangeLog generation process more robust
+
+2006-11-11 13:57  d
+
+	* NEWS: correct NEWS; bugs 57 and 58 fixed
+
+2006-11-11 13:33  d
+
+	* NEWS, configure.ac: bump to 1.8.3
+
+2006-11-11 13:32  d
+
+	* NEWS, compat.h, configure.ac, ether.c, ip.c, ip6.c, ipx.c,
+	  loop.c, main.c, ppp.c, resize.c, tag.h, tcp.c, tcp_x11.c, type.h,
+	  udp.c: support compilation on Solaris, AIX, *BSD, Linux
+
+2006-11-11 11:51  d
+
+	* NEWS, ether.c: bug 58: fix segfault with unknown ethertype
+	  (really)
+
+2006-11-11 11:50  d
+
+	* NEWS, compat.h, configure.ac, ether.c, ip.c, ip6.c, ipx.c,
+	  loop.c, main.c, ppp.c, resize.c, tcp.c, type.h, udp.c: reverse
+	  commit 1169 (it was too much!)
+
+2006-11-11 11:48  d
+
+	* NEWS, compat.h, configure.ac, ether.c, ip.c, ip6.c, ipx.c,
+	  loop.c, main.c, ppp.c, resize.c, tcp.c, type.h, udp.c: bug 58:
+	  fix segfault with unknown ethertype
+
+2006-11-10 06:11  d
+
+	* pktstat.spec: Add prereq for ncurses and libpcap devel when
+	  compiling
+
+2006-11-10 05:52  d
+
+	* pktstat.spec: fix typo RPM_BULID_ROOT -> RPM_BUILD_ROOT
+
+2006-11-10 05:50  d
+
+	* pktstat.spec: remove 'legacy' Copyright header from spec
+
+2006-11-10 05:46  d
+
+	* pktstat.spec: update spec file to 1.8.2
+
+2006-11-10 05:43  d
+
+	* NEWS, configure.ac: update for 1.8.2 release
+
+2006-11-10 05:34  d
+
+	* ether.c, ip.c, loop.c, sll.c, wol.c: remove more compiler
+	  warnings
+
+2006-11-10 05:34  d
+
+	* resize.c: correct problem where SIGWINCH detection was reversed
+
+2006-11-10 05:29  d
+
+	* display.c, ether.c, frag.c, ipx.c, main.c: remove some warnings
+	  on linux
+
+2006-02-12 10:36  d
+
+	* Makefile.am: remove useless AUTHORS file
+
+2006-02-12 10:32  d
+
+	* NEWS: bring NEWS up to date
+
+2006-02-08 00:35  d
+
+	* NEWS, configure.ac, pktstat.spec: 1.8.1 fixes
+
+2006-02-08 00:35  d
+
+	* display.c: don't draw help line when editing; allow Ctrl-L to
+	  redraw when editing
+
+2006-02-08 00:29  d
+
+	* strlcpy.c: allow to build under linux
+
+2006-01-29 04:52  d
+
+	* NEWS: correct version number in NEWS
+
+2006-01-29 02:37  d
+
+	* Makefile.am, configure.ac: fix up strlcpy.c dependency, and
+	  automake-1.4 leftovers
+
+2006-01-29 01:52  d
+
+	* display.c: bug 38: put 'resolving ip' message on 2nd-last line,
+	  and put wait time in teh prompt with interactive 'w' command
+
+2006-01-27 15:49  d
+
+	* NEWS: update NEWS
+
+2006-01-27 15:47  d
+
+	* display.c, pktstat.1.in: bug 30: allow changing the wait time
+	  during display
+
+2006-01-27 15:12  d
+
+	* Makefile.am, pktstat.1.in: substitute $PATH_PKTSTATRC in the
+	  manpage
+
+2006-01-27 15:10  d
+
+	* Makefile.am, pktstat.1, pktstat.1.in: substitute $sysconfdir in
+	  the manpage
+
+2006-01-27 15:02  d
+
+	* type.h: types based on autoconf results
+
+2006-01-27 15:01  d
+
+	* Makefile.am, abbrev.c, compat.h, configure.ac, display.c, err.c,
+	  ether.c, flow.c, frag.c, hash.c, icmp.c, ifc.c, ip.c, ip6.c,
+	  ipx.c, loop.c, main.c, memcmp.c, ppp.c, resize.c, sll.c,
+	  strlcpy.c, tag.c, tcp.c, tcp_http.c, tcp_x11.c, udp.c, wol.c: add
+	  more autoconf
+
+2006-01-27 12:37  d
+
+	* Makefile.am: add manual paegs to the distribution
+
+2006-01-27 12:37  d
+
+	* configure.ac: correct broken autoconf package name/version
+
+2006-01-27 12:30  d
+
+	* BSDmakefile, GNUmakefile, Makefile, Makefile.am, abbrev.c,
+	  configure.ac, display.c, ether.c, flow.c, frag.c, hash.c, icmp.c,
+	  ifc.c, ip.c, ip6.c, ipx.c, loop.c, main.c, ppp.c, resize.c,
+	  sll.c, tag.c, tcp.c, tcp_http.c, tcp_x11.c, udp.c, wol.c: bug 37:
+	  Start using autoconf
+
+2006-01-27 12:13  d
+
+	* CHANGES, NEWS: rename CHANGES to NEWS
+
+2006-01-27 12:11  d
+
+	* COPYING, README: move copyright from README to COPYING
+
+2005-10-15 11:24  d
+
+	* .: reorganise repository after cvs2svn
+
+2005-03-04 13:58  d
+
+	* ditch sup support
+
+2005-03-04 13:52  d
+
+	* documentation fixes
+
+2004-11-06 06:53  d
+
+	* punctuation
+
+2004-11-06 06:39  d
+
+	* 1.7.5
+
+2004-11-06 06:33  d
+
+	* wake-on-lan packet decoding
+
+2004-11-06 06:33  d
+
+	* improve readability
+
+2004-11-06 06:32  d
+
+	* properly decode pppoe; add dispatch to wake-on-lan decoding
+
+2004-11-06 06:31  d
+
+	* pathetic attempt to catch fragment bug
+
+2004-11-06 06:31  d
+
+	* document bucket_find()
+
+2004-10-25 11:05  d
+
+	* spec file for linux
+
+2004-05-24 10:38  d
+
+	* missed endian
+
+2004-03-15 03:48  d
+
+	* update email address, mention fragments
+
+2004-03-13 17:01  d
+
+	* make freshmeat the centre of releases
+
+2004-03-13 16:51  d
+
+	* update for 1.7.4
+
+2004-03-13 16:51  d
+
+	* doc
+
+2004-03-13 16:51  d
+
+	* missed header
+
+2004-03-13 16:48  d
+
+	* tidy, document, version 1.7.4
+
+2004-03-13 16:47  d
+
+	* document
+
+2004-03-13 16:47  d
+
+	* add prototypes
+
+2004-03-13 16:46  d
+
+	* use TAGLEN
+
+2004-03-13 16:14  d
+
+	* use CPPFLAGS instead of CCFLAGS
+
+2004-03-13 16:12  d
+
+	* remove debugging (oops)
+
+2004-03-13 16:09  d
+
+	* use 0x prefix when displaying hex
+
+2004-03-13 16:06  d
+
+	* correctly tag IPv4 fragments
+
+2004-03-13 16:06  d
+
+	* -Wall
+
+2004-03-13 16:05  d
+
+	* use comma instead of colon between IPv6 addresses and ports -
+	  makes it clearer, and more succint than square brackets
+
+2004-03-13 16:02  d
+
+	* add support for fragment reassembly
+
+2004-03-13 16:02  d
+
+	* add include for errx()
+
+2004-03-13 16:02  d
+
+	* add frag, remove tcp_sup
+
+2004-02-24 12:30  d
+
+	* better
+
+2004-02-24 12:28  d
+
+	* prepare for 1.7.3a
+
+2004-02-24 12:25  d
+
+	* better wording on the likely culprit of my 8193 flows
+
+2004-02-24 12:21  d
+
+	* check for malloc/realloc returning NULL and exit gracefully
+
+2003-09-10 20:10  d
+
+	* 1.7.3b
+
+2003-08-29 07:15  d
+
+	* remove sup - for now
+
+2003-08-29 07:15  d
+
+	* extra semicolon caused cnfusion
+
+2003-08-25 11:14  d
+
+	* 1.7.3a
+
+2003-08-25 11:12  d
+
+	* Give up an use my own ipx_ntoa(). Not all OSes have this.
+	  Inspired by Kirill Ponomarew <krion@FreeBSD.org>.
+
+2003-08-25 11:11  d
+
+	* Support FreeBSD's unique endian conversion macro names.
+
+2003-08-25 11:10  d
+
+	* Remove need to include machendian.h whenever flow.h or tag.h is
+	  used.
+	  (This is horrible)
+	  found by Daniel Fraga <fraga@myrealbox.com>
+
+2003-08-24 14:33  d
+
+	* initial
+
+2003-08-24 14:31  d
+
+	* 1.7.3
+
+2003-08-24 14:28  d
+
+	* a bit cleaner
+
+2003-08-18 04:10  d
+
+	* better comments
+
+2003-08-18 04:09  d
+
+	* add tag.c and simplify
+
+2003-08-18 04:09  d
+
+	* split tag_combine() into its own file.
+
+2003-08-18 04:08  d
+
+	* support NOMAN
+
+2003-08-17 13:30  d
+
+	* subtle wording change
+
+2003-08-17 11:39  d
+
+	* ifdef -> if defined()
+
+2003-08-17 11:38  d
+
+	* DLT_LINUX_SLL support
+
+2003-08-17 11:38  d
+
+	* splitting up of ether_tag into ether_tagx
+
+2003-08-17 11:38  d
+
+	* Support for DLT_LINUX_SLL, from Corey Wright
+	  <undefined@pobox.com>
+	  and Menno Smits <menno@netbox.biz>.
+
+2003-08-05 12:40  d
+
+	* missing header for redhat 6.2. menno@netbox.biz
+
+2003-05-05 01:15  d
+
+	* 1.7.2q
+
+2003-05-05 01:15  d
+
+	* always clear filter line
+
+2003-04-28 00:01  d
+
+	* better screen control when 2nd line is long
+
+2003-04-19 03:09  d
+
+	* fix total-packets display
+
+2003-04-17 03:33  d
+
+	* Remove unnecessary padding around min/max/avg numbers
+	  ** Fixed the decaying averages to be correct when the wait time
+	  is not 1 second.
+
+2003-04-14 00:28  d
+
+	* patchlevel o
+	  fix bug where percentages wrong in display
+	  add a -m flag to set maxbps
+
+2003-04-14 00:27  d
+
+	* distinguish between to-server and to-client http packets
+
+2003-04-14 00:27  d
+
+	* insert the HTTP response code before the URI desc
+
+2003-04-05 10:12  d
+
+	* 1.7.2n
+
+2003-04-05 10:11  d
+
+	* make more buffers used in createing tags TAGLEN in length instead
+	  of random values like 256 and 32
+
+2003-04-05 09:30  d
+
+	* oops! missing #include
+
+2003-04-05 09:26  d
+
+	* 1.7.2m
+
+2003-04-05 09:26  d
+
+	* implement missing packet total count.
+	  increase tag size storage in local functions with new
+	  TAGLEN/DESCLEN constants.
+
+2003-04-05 09:24  d
+
+	* some typos
+
+2003-04-05 09:15  d
+
+	* handle strange case of 999.96 being rounded up to 1000 but not
+	  enjoying a larger SI unit
+
+2003-04-05 07:14  d
+
+	* factor out the help line to be easier to extend
+
+2003-04-05 06:09  d
+
+	* remove a warning when compiling under linux
+
+2003-04-05 06:06  d
+
+	* linux is a dogs breakfast
+
+2003-04-05 06:06  d
+
+	* 1.7.2l (for linux) also comment where drop privileges should go
+
+2003-04-03 03:35  d
+
+	* Add a more sensible "-A none" option
+
+2003-04-03 03:34  d
+
+	* better
+
+2003-04-03 03:08  d
+
+	* 1.7.2
+
+2003-04-03 03:08  d
+
+	* add the new files
+
+2003-04-03 03:07  d
+
+	* Add SUP protocol decoder.
+	  Also, add port 3127 for HTTP decoding.. since thats the port Matt
+	  uses for
+	  his transparent squid cache.
+
+2003-04-03 03:06  d
+
+	* add SUP decoder
+
+2003-04-03 03:06  d
+
+	* synchronize documentation
+
+2003-04-03 03:06  d
+
+	* document the flags
+
+2003-04-03 03:05  d
+
+	* tighten legal stuff slightly
+
+2003-04-03 03:05  d
+
+	* factor endianness macro out into a separate header file
+
+2003-04-03 02:56  d
+
+	* When a class has a description, show a hyphen if it is closed, or
+	  a right-angle if it is 'live'.
+	  Also, '?' is now a toggle for the 'help' line - ie it doesn't
+	  time out.
+
+2003-04-03 00:47  d
+
+	* show 'ip proto XX' in decimal instead of hex to stop confusing
+	  people
+
+2002-10-03 15:22  d
+
+	* add 802.11x
+
+2002-10-03 13:04  d
+
+	* add a timestamp when the link goes down
+
+2002-09-03 05:21  d
+
+	* linux support
+
+2002-09-03 05:02  d
+
+	* duhhhh
+
+2002-09-02 15:19  d
+
+	* add -P flag for promisc mode Stefan Roels
+	  <droopy@catv7253.extern.kun.nl>
+
+2002-08-23 00:14  d
+
+	* add better IPX support
+
+2002-08-23 00:13  d
+
+	* 1.7.1 and -p flag
+
+2002-08-23 00:13  d
+
+	* add packet display support (-p)
+
+2002-08-22 23:47  d
+
+	* add legal notice; explicit public domain
+
+2002-07-25 02:40  d
+
+	* readme
+
+2002-07-25 02:39  d
+
+	* add Total line
+
+2002-06-23 00:50  d
+
+	* add more RCS tags, and public domain notices
+
+2002-06-23 00:50  d
+
+	* better
+
+2002-06-23 00:38  d
+
+	* document more about abbreviation files and reset command
+
+2002-06-23 00:38  d
+
+	* the reset keystroke now resets more things
+
+2002-06-23 00:38  d
+
+	* look for default abbrev files such as .pktstatrc
+
+2002-06-23 00:23  d
+
+	* better comments
+
+2002-06-20 21:53  d
+
+	* 1.7
+
+2002-06-20 21:52  d
+
+	* better abbreviation matching
+
+2002-06-06 06:57  d
+
+	* add abbreviations
+
+2002-06-05 04:13  d
+
+	* give full order if times the same
+
+2002-06-03 03:43  d
+
+	* some info for the confused
+
+2002-06-03 03:40  d
+
+	* add a -l flag for display of flows by last-seen time
+
+2002-06-03 03:10  d
+
+	* handle suspending better
+
+2002-06-03 03:09  d
+
+	* handle bad numbers better
+
+2002-05-06 00:48  d
+
+	* desribe direction bug; cleanup bugs section a little
+
+2002-05-06 00:47  d
+
+	* restore help line after displaying a temporary message if help is
+	  being displayed
+
+2002-05-06 00:24  d
+
+	* getservbyport takes a network-order argument
+
+2002-05-06 00:12  d
+
+	* add version to help line
+
+2002-05-06 00:12  d
+
+	* fix another endianness prob
+
+2002-05-06 00:10  d
+
+	* fix endian bug (found by nguyen@ucalgary.ca) and add better
+	  comments
+
+2002-04-27 05:17  d
+
+	* 1.6.4
+
+2002-04-27 02:12  d
+
+	* add -E to getopt
+
+2002-04-27 02:11  d
+
+	* hide the -E flag, but implement it
+
+2002-04-27 02:06  d
+
+	* add help ("?") key - shows keys at bottom of screen
+
+2002-04-27 02:05  d
+
+	* dont quit on interrups in poll
+
+2002-04-24 23:55  d
+
+	* DLT_LOOP should be ifdef'd out
+
+2002-04-23 11:10  d
+
+	* 1.6.2
+
+2002-04-23 11:09  d
+
+	* add -E flag (commented out); also poll now allows keys to be
+	  immediately recognised
+
+2002-04-23 11:09  d
+
+	* add E flag
+
+2002-04-23 11:08  d
+
+	* add -E flag (commented out); use poll on stdin and pcap to catch
+	  keystrokes early
+
+2002-04-23 11:08  d
+
+	* keepalive is now a time, not a count; allow multiple closes as
+	  will happen with atexit()
+
+2002-04-23 11:07  d
+
+	* keepalive is now a time, not a count
+
+2002-04-19 00:03  d
+
+	* now works on linux properly
+
+2002-04-14 07:31  d
+
+	* 1.6.1
+
+2002-04-14 07:31  d
+
+	* ungh.. gcc 2.95.4 cant cope
+
+2002-04-14 01:08  d
+
+	* better comments, version 1.6
+
+2002-04-12 14:51  d
+
+	* explain why some flows dont get a description
+
+2002-04-12 14:47  d
+
+	* add extra ports for x11; cleanup
+
+2002-04-12 14:45  d
+
+	* better comments
+
+2002-04-12 14:34  d
+
+	* decode PPPoE packets
+
+2002-04-12 14:18  d
+
+	* better comment
+
+2002-04-12 10:28  d
+
+	* better comments
+
+2002-04-12 10:07  d
+
+	* forgot T in getopt().. thanks Andras BALI
+
+2002-04-10 21:46  d
+
+	* bump version
+
+2002-04-10 21:46  d
+
+	* begin to add linux support
+
+2002-04-09 03:35  d
+
+	* DLT_RAW, for linux
+
+2002-04-08 05:26  d
+
+	* comment
+
+2002-04-08 05:25  d
+
+	* add DLT_LOOP support (for loopback devices)
+
+2002-04-08 05:13  d
+
+	* clear the screen better
+
+2002-04-08 05:13  d
+
+	* no need to put the program name in
+
+2002-04-08 05:12  d
+
+	* better
+
+2002-02-10 05:47  d
+
+	* show 1, 5 and 15 minute averages
+
+2002-02-10 05:47  d
+
+	* be careful with consts
+
+2002-02-10 05:47  d
+
+	* superfluous arg
+
+2002-02-10 05:47  d
+
+	* make the w flag external; version 1.5.1
+
+2002-02-10 05:02  d
+
+	* version 1.5
+
+2002-02-10 05:00  d
+
+	* mention if interface is down or not running
+
+2002-02-03 04:49  d
+
+	* oops, indent for desc fields with -T
+
+2002-02-03 04:48  d
+
+	* mention icmp6
+
+2002-02-01 02:22  d
+
+	* show totals only with -T
+
+2002-02-01 02:19  d
+
+	* add -T (totals) and display elapsed time
+
+2002-01-31 08:36  d
+
+	* its not a device, its an interface
+
+2002-01-31 08:34  d
+
+	* link udp and tcp to ip6
+
+2002-01-31 08:33  d
+
+	* better icmp display
+
+2002-01-31 04:47  d
+
+	* 1.4
+
+2002-01-31 04:47  d
+
+	* add another bug
+
+2002-01-31 04:45  d
+
+	* doh
+
+2002-01-31 04:44  d
+
+	* changing the F flag clears the hash table
+
+2002-01-31 04:25  d
+
+	* ipv6
+
+2002-01-31 04:19  d
+
+	* get rid of type warning
+
+2002-01-31 04:14  d
+
+	* add resolving info
+
+2002-01-31 04:14  d
+
+	* add CONNECT as a keyword to look for
+
+2002-01-31 04:13  d
+
+	* add an -F flag
+
+2002-01-31 04:13  d
+
+	* add a generic hash function
+
+2002-01-29 07:29  d
+
+	* 1.3.1
+
+2002-01-29 07:29  d
+
+	* better way of looking for ChangeProperty requests - more
+	  stateless
+
+2002-01-29 02:06  d
+
+	* oops
+
+2002-01-28 17:00  d
+
+	* 1.3
+
+2002-01-28 17:00  d
+
+	* ignore packets after we get the desc
+
+2002-01-28 16:50  d
+
+	* split out http and add x11
+
+2002-01-28 16:49  d
+
+	* add a per-flow private data
+
+2002-01-28 16:49  d
+
+	* pretty
+
+2002-01-28 16:49  d
+
+	* change snaplen to 1500 for x11
+
+2002-01-28 16:48  d
+
+	* kill flows on -n change
+
+2002-01-28 11:32  d
+
+	* oops
+
+2002-01-28 11:31  d
+
+	* pretty
+
+2002-01-28 11:31  d
+
+	* add resize
+
+2002-01-28 11:26  d
+
+	* oops
+
+2002-01-28 11:23  d
+
+	* handle more keystrokes
+
+2002-01-28 11:23  d
+
+	* nflag is now extern
+
+2002-01-28 11:23  d
+
+	* add igmp
+
+2002-01-28 11:23  d
+
+	* describe the keystrokes recognised
+
+2002-01-28 11:22  d
+
+	* make flags properly external
+
+2002-01-28 11:22  d
+
+	* add ftp-data: leader to dtp stream desc
+
+2002-01-26 14:13  d
+
+	* 1.1a - small bugfixes
+
+2002-01-26 14:12  d
+
+	* update display at beginning
+
+2002-01-26 13:55  d
+
+	* duh - why didn't -Wall pick this up???
+
+2002-01-26 13:46  d
+
+	* add a little drop down symbol for descriptions
+
+2002-01-26 13:46  d
+
+	* remove some type warnings
+
+2002-01-25 22:57  d
+
+	* add kilo, mega, giga prefixes
+
+2002-01-25 22:13  d
+
+	* new version 1.1
+
+2002-01-25 22:12  d
+
+	* show bits per second, add -B flag, and remove screen flicker.
+	  underline some headings
+
+2002-01-25 13:31  d
+
+	* add a version string: 1.0
+
+2002-01-25 13:29  d
+
+	* recognise FTP PORT, EPRT and passive port open responses
+
+2002-01-25 13:28  d
+
+	* better
+
+2002-01-25 13:28  d
+
+	* use longer snapshot length
+
+2002-01-25 09:14  d
+
+	* no need to look inside server response packets
+
+2002-01-25 09:07  d
+
+	* better screen handling and quit on q
+
+2002-01-25 08:42  d
+
+	* change the sense of the -c and -t flags
+
+2002-01-25 08:32  d
+
+	* add description strings for some tcp protocols
+
+2002-01-25 04:57  d
+
+	* add PPP_COMP because i see a few of these
+
+2002-01-25 04:51  d
+
+	* rename back to pktstat
+
+2002-01-25 04:46  d
+
+	* add manual page
+
+2002-01-25 04:35  d
+
+	* Initial revision
+
